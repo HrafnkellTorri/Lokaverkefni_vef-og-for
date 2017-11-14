@@ -1,0 +1,12 @@
+* 
+{ 
+	padding: 0;
+	margin: 0;
+}
+canvas 
+{
+	border: 3px black dotted;
+	background: #eee;
+ 	display: block;
+ 	margin: 0 auto; 
+}
