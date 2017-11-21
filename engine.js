@@ -7,9 +7,8 @@ var dx = 3;
 var dy = -3;
 var ballRadius = 30;
 
-
-var playerHeight = 10;
-var playerWidth = 75;
+var playerHeight = 20;
+var playerWidth = 20;
 var playerX = (canvas.width-playerWidth)/2;
 var playerY = canvas.height-playerHeight;
 
@@ -41,17 +40,17 @@ function draw() {
     drawBall();
     drawplayer();
     checkboundaries();
-    if(rightPressed) {
+    if(rightPressed && playerX < canvas.width - playerWidth - 3) {
         playerX += 7;
     }
-    else if(leftPressed) {
+    else if(leftPressed && playerX > 2) {
         playerX -= 7;
     }
-    else if(upPressed) {
+    else if(upPressed && playerY > 4) {
         playerY -= 7;
     }
-    else if(downPressed) {
-        playery -= 7;
+    else if(downPressed && playerY < canvas.height - 3 - playerHeight) {
+        playerY += 7;
     }
 
 }
@@ -67,11 +66,10 @@ function drawBall() {
 function drawplayer() {
     ctx.beginPath();
     ctx.rect(playerX, playerY, playerWidth, playerHeight);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#9925EE";
     ctx.fill();
     ctx.closePath();
 }
-
 
 
 
