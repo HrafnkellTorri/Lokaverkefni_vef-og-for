@@ -12,6 +12,10 @@ button
 
 }
 
+button { color: black; }
+button:visited { color: black; text-decoration: underline= non}
+button:focused { color: black; }
+
 button + button { margin-top: 1px;  padding: 20px; }
 
 button:hover {
