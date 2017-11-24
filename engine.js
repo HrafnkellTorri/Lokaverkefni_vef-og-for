@@ -1,14 +1,12 @@
+"use strict";
+
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-var x = canvas.width/5;
-var y = canvas.height-30;
-var dx = 3;
-var dy = -3;
 var ballRadius = 30;
 
-var playerHeight = 20;
-var playerWidth = 20;
+var playerHeight = 40;
+var playerWidth = 40;
 var playerX = (canvas.width-playerWidth)/2;
 var playerY = canvas.height-playerHeight;
 
@@ -18,28 +16,69 @@ var upPressed = false;
 var downPressed = false;
 
 
-function checkboundaries(){
-    
-    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-        ballRadius += 1;
+var Ball = {
+
+    create : function (ball_x, ball_y,ball_dx,ball_dy,ball_color)
+    {
+        var newBall = Object.create(this);
+        newBall.x = ball_x;
+        newBall.y = ball_y;
+        newBall.dx = ball_dx;
+        newBall.dy = ball_dy;
+        newBall.color = ball_color;
+        return newBall;
+    },
+
+    drawBall : function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.closePath();
+    },
+
+    checkboundaries : function() {
+        if(this.x + this.dx > canvas.width-ballRadius || this.x + this.dx < ballRadius) {
+            this.dx = -this.dx;
+            this.y += 1;
+        }
+
+        if(this.y + this.dy > canvas.height-ballRadius || this.y + this.dy < ballRadius) {
+            this.dy = -this.dy;
+            this.x -= 1;
+        }
+
+
+        this.x += this.dx;
+        this.y += this.dy;
+
     }
+};
 
-    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
-        dy = -dy;
-        ballRadius += 1;
-    }
-
-    x += dx;
-    y += dy;
-
-}
+var ball1 = Ball.create(500,100,1,3,"red");
+var ball2 = Ball.create(111,250,5,2,"green");
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
+    ball1.checkboundaries();
+    ball2.checkboundaries();
+    ball1.drawBall();
+    ball2.drawBall();
     drawplayer();
-    checkboundaries();
+    playerControler();
+}
+
+
+function drawplayer() {
+    ctx.beginPath();
+    ctx.rect(playerX, playerY, playerWidth, playerHeight);
+    ctx.fillStyle = "#9925EE";
+    ctx.fill();
+    ctx.closePath();
+}
+
+function playerControler()
+{
     if(rightPressed && playerX < canvas.width - playerWidth - 3) {
         playerX += 7;
     }
@@ -52,32 +91,10 @@ function draw() {
     else if(downPressed && playerY < canvas.height - 3 - playerHeight) {
         playerY += 7;
     }
-
 }
 
-function drawBall() {
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
-}
-
-function drawplayer() {
-    ctx.beginPath();
-    ctx.rect(playerX, playerY, playerWidth, playerHeight);
-    ctx.fillStyle = "#9925EE";
-    ctx.fill();
-    ctx.closePath();
-}
-
-
-
-
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-function keyDownHandler(e) {
+function keyDownHandler(e) 
+{
     if(e.keyCode == 39) {
         rightPressed = true;
     }
@@ -92,7 +109,8 @@ function keyDownHandler(e) {
     }
 }
 
-function keyUpHandler(e) {
+function keyUpHandler(e) 
+{
     if(e.keyCode == 39) {
         rightPressed = false;
     }
@@ -106,5 +124,8 @@ function keyUpHandler(e) {
         downPressed = false;
     }
 }
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 
 setInterval(draw, 10);
