@@ -5,8 +5,15 @@
 }
 canvas 
 {
-	border: 3px black dotted;
+	border: 3px solid;
 	background: #eee;
  	display: block;
  	margin: 0 auto; 
+ 	background-image: url("Fasteign.jpg");
+ 	background-repeat: no-repeat;
+ 	background-size: 100% 110%;
+}
+#audio
+{
+	visibility: hidden;
 }

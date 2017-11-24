@@ -1,0 +1,60 @@
+button
+{
+  margin: 50px auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 400px;
+  display: block;
+  max-width: 700px;
+  border: 1px solid black;
+  animation: fadein 6s;
+  opacity: 1;
+
+}
+
+button + button { margin-top: 1px;  padding: 20px; }
+
+button:hover {
+    background-color: red; /* Green */
+    color: white;
+}
+
+div
+{
+  text-align: center;
+  background-color: lightblue;
+  max-width: 720px;
+  padding: 1px;
+  opacity: 0.95;
+  border: 1px solid black;
+  margin: auto;
+}
+
+@keyframes fadein 
+{
+    0% {
+        opacity:0;
+    }
+    10% {
+       opacity:0.40;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+video 
+{ 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
+  background-size: cover;
+  transition: 1s opacity;
+}
