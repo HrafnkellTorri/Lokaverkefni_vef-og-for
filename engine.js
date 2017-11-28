@@ -1,9 +1,7 @@
 "use strict";
 var alert;
 
-
 var canvas = document.getElementById("myCanvas");
-var textColor = randomColor();
 var ctx = canvas.getContext("2d");
 
 var difficulty = 6;
@@ -21,6 +19,11 @@ var downPressed = false;
 var player1color = randomColor(); 
 var rawplayer1Score = 0;
 var trueplayer1Score = 0;
+
+//saving
+var playerScore;
+var gameResult = {};
+var highscoreList = [];
 
 var Ball = {
 
@@ -43,6 +46,7 @@ var Ball = {
     ctx.fill();
     ctx.arc(this.x, this.y, this.ballRadius, 0, Math.PI*2);
     ctx.fillStyle = "black";
+    ctx.lineWidth = 0.5;
     ctx.stroke();
     ctx.closePath();
     },
@@ -51,18 +55,18 @@ var Ball = {
         if(this.x + this.dx > canvas.width-this.ballRadius || this.x + this.dx < this.ballRadius) {
             this.dx = -this.dx;
             this.ballRadius += 1;
-            
         }
+
         if(this.y + this.dy > canvas.height-this.ballRadius || this.y + this.dy < this.ballRadius) {
             this.dy = -this.dy;
             this.ballRadius += 0.5;
-            
         }
+
         if (PlayerAndCircleCollision(this)) 
         {
-
-            setTimeout(alert("Hello "), 15000);
-            location.reload();
+            alert("YOU DIED");
+            toHighscoreList();
+            restartGame();
         } 
         else 
         {
@@ -73,20 +77,21 @@ var Ball = {
     }
 };
 
-var ball1 = Ball.create(Math.random() * 500 + 20,Math.random() * 500 + 20,-difficulty,difficulty,30,randomColor());
-var ball2 = Ball.create(Math.random() * 500 + 20,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
-var ball3 = Ball.create(Math.random() * 500 + 20,Math.random() * 500 + 20,3,3,30,randomColor());
-var ball4 = Ball.create(Math.random() * 500 + 20,Math.random() * 500 + 20,3,-3,30,randomColor());
-var ball5 = Ball.create(Math.random() * 500 + 20,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
-var ball6 = Ball.create(Math.random() * 500 + 20,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
+var ball1 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,-difficulty,difficulty,30,randomColor());
+var ball2 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
+var ball3 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,3,3,30,randomColor());
+var ball4 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,3,-3,30,randomColor());
+var ball5 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
+var ball6 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
 
 function draw() 
 {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawplayer();
     playerControler();
-    scoreDrawingAndDifficultySettings();
+    DifficultySettings();
     spawnBalls();
+    toHighscoreList(); 
 }
 
 function drawplayer() {
@@ -96,7 +101,7 @@ function drawplayer() {
     ctx.fill();
     ctx.rect(playerX, playerY, playerWidth, playerHeight);
     ctx.fillStyle = "black";
-    ctx.lineWidth = 3.5;
+    ctx.lineWidth = 0.5;
     ctx.stroke();
     ctx.closePath();
 }
@@ -131,18 +136,17 @@ function playerControler()
     {
         
         if(rightPressed && playerX < canvas.width - playerWidth - 3) {
-            playerX += 14;
+            playerX += 12;
         }
         else if(leftPressed && playerX > 2) {
-            playerX -= 14;
+            playerX -= 12;
         }
         else if(upPressed && playerY > 4) {
-            playerY -= 14;
+            playerY -= 12;
         }
         else if(downPressed && playerY < canvas.height - 3 - playerHeight) {
-            playerY += 14;
+            playerY += 12;
         }
-
         score(); 
     }
 
@@ -217,12 +221,11 @@ function keyUpHandler(e)
     }
 }
 
-function scoreDrawingAndDifficultySettings()
+function DifficultySettings()
 {
-    ctx.font = "30px Arial";
-    ctx.fillStyle = textColor;
+
     var num = Math.round(rawplayer1Score / 100);
-    ctx.fillText("Points: " + num + " " + difficulty + " ",10,50);
+    
     if(num > 5)
     {
         difficulty = 10;
@@ -250,6 +253,39 @@ function score()
     rawplayer1Score++;
 }
 
+function restartGame()
+{
+    difficulty = 6;
+    rawplayer1Score = 0;
+    trueplayer1Score = 0;
+    ball1.x = Math.random() * 500 + 20;
+    ball2.x = Math.random() * 500 + 20;
+    ball1.y = Math.random() * 500 + 20;
+    ball2.y = Math.random() * 500 + 20;
+    rightPressed = false;
+    leftPressed = false;
+    upPressed = false; 
+    downPressed = false;
+    ball1.ballRadius = 30;
+    ball2.ballRadius = 30;
+    playerX = (canvas.width-playerWidth)/2;
+    playerY = canvas.height-playerHeight;
+}
+
+function toHighscoreList() {
+    var num = Math.round(rawplayer1Score / 100);
+    playerScore = num; 
+    gameResult = { score: playerScore};
+    highscoreList.push(gameResult);
+
+    highscoreList.sort(function(a,b) { return (b.score - a.score ); });
+    localStorage.setItem('gameResult', JSON.stringify(gameResult));
+
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Points: " + num ,canvas.width - 1070,40);
+    ctx.fillText("HighScore: " + highscoreList[0].score,canvas.width - 185,40);
+}
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
