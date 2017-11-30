@@ -29,14 +29,14 @@ var Ball = {
 
     create : function (ball_x, ball_y,ball_dx,ball_dy,ball_rad,ball_color)
     {
-        var newBall = Object.create(this);
-        newBall.x = ball_x;
-        newBall.y = ball_y;
-        newBall.dx = ball_dx;
-        newBall.dy = ball_dy;
-        newBall.ballRadius = ball_rad;
-        newBall.color = ball_color;
-        return newBall;
+        var newFoe = Object.create(this);
+        newFoe.x = ball_x;
+        newFoe.y = ball_y;
+        newFoe.dx = ball_dx;
+        newFoe.dy = ball_dy;
+        newFoe.ballRadius = ball_rad;
+        newFoe.color = ball_color;
+        return newFoe;
     },
 
     drawBall : function() {
@@ -93,6 +93,18 @@ function draw()
     spawnBalls();
     toHighscoreList(); 
 }
+
+var Player = {
+
+    create : function (Player_x, Player_y,Player_width,Player_Height)
+    {
+        var newPlayer = Object.create(this);
+        newPlayer.x = Player_x;
+        newPlayer.y = ;
+        newPlayer.dx = ball_dx;
+        newPlayer.dy = ball_dy;
+        return newPlayer;
+    },
 
 function drawplayer() {
     ctx.beginPath();
