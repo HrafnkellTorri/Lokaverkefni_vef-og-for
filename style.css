@@ -1,15 +1,14 @@
 * 
-{ 
+{
+	background-color: black; 
 	padding: 0;
 	margin: 0;
 }
 canvas 
 {
-	border: 3px solid;
-	background: #eee;
+	border: 3px solid white;
  	display: block;
  	margin: 0 auto; 
- 	background-color: #DFE2DB;
  	background-repeat: no-repeat;
  	background-size: 100% 110%;
 }

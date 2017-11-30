@@ -45,8 +45,8 @@ var Ball = {
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.arc(this.x, this.y, this.ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "black";
-    ctx.lineWidth = 0.5;
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 2;
     ctx.stroke();
     ctx.closePath();
     },
@@ -70,19 +70,19 @@ var Ball = {
         } 
         else 
         {
-            ctx.fillStyle = "skyblue";
+            
         }
         this.x += this.dx;
         this.y += this.dy;
     }
 };
 
-var ball1 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,-difficulty,difficulty,30,randomColor());
-var ball2 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
-var ball3 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,3,3,30,randomColor());
-var ball4 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,3,-3,30,randomColor());
-var ball5 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
-var ball6 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 20,difficulty,difficulty,30,randomColor());
+var ball1 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,-difficulty,difficulty,30,randomColor());
+var ball2 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
+var ball3 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,3,3,30,randomColor());
+var ball4 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,3,-3,30,randomColor());
+var ball5 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
+var ball6 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
 
 function draw() 
 {
@@ -100,8 +100,8 @@ function drawplayer() {
     ctx.fillStyle = player1color;
     ctx.fill();
     ctx.rect(playerX, playerY, playerWidth, playerHeight);
-    ctx.fillStyle = "black";
-    ctx.lineWidth = 0.5;
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 1;
     ctx.stroke();
     ctx.closePath();
 }
@@ -135,16 +135,16 @@ function playerControler()
     if (rightPressed || leftPressed || upPressed || downPressed) 
     {
         
-        if(rightPressed && playerX < canvas.width - playerWidth - 3) {
+        if(rightPressed && playerX < canvas.width - playerWidth) {
             playerX += 12;
         }
-        else if(leftPressed && playerX > 2) {
+        else if(leftPressed && playerX > 0) {
             playerX -= 12;
         }
-        else if(upPressed && playerY > 4) {
+        else if(upPressed && playerY > 0) {
             playerY -= 12;
         }
-        else if(downPressed && playerY < canvas.height - 3 - playerHeight) {
+        else if(downPressed && playerY < canvas.height - playerHeight) {
             playerY += 12;
         }
         score(); 
@@ -282,7 +282,7 @@ function toHighscoreList() {
     localStorage.setItem('gameResult', JSON.stringify(gameResult));
 
     ctx.font = "30px Arial";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.fillText("Points: " + num ,canvas.width - 1070,40);
     ctx.fillText("HighScore: " + highscoreList[0].score,canvas.width - 185,40);
 }
