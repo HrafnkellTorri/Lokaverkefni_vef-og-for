@@ -1,2 +1,3 @@
 # Lokaverkefni_vef-og-for
-lokaverkefni í vef og forritun
+See the game up and running!
+https://hrafnkelltorri.github.io./Singleplayer.html
