@@ -11,13 +11,10 @@ var leftPressed = false;
 var upPressed = false; 
 var downPressed = false;
 
-var d_Pressed = false;
-var a_Pressed = false;
-var w_Pressed = false; 
-var s_Pressed = false;
-
 var rawplayer1Score = 0;
 var trueplayer1Score = 0;
+
+var lastDeath = "";
 
 //saving
 var playerScore;
@@ -57,14 +54,8 @@ var Ball = {
     {
         if (Player1.PlayerAndCircleCollision(this)) 
         {
-            alert("Player 1 DIED!");
-            toHighscoreList();
-            restartGame();
-        } 
-        else if (Player2.PlayerAndCircleCollision(this)) 
-        {
-            alert("PLAYER 2 DIED!");
-            toHighscoreList();
+            timer1=0;
+            lastDeath="Player 1 Died";
             restartGame();
         } 
         if(this.x + this.dx > canvas.width-this.ballRadius || this.x + this.dx < this.ballRadius) {
@@ -156,36 +147,15 @@ var Player = {
                 else if(downPressed  && this.y < canvas.height - this.height) {
                     this.y += 12;
                 }
-
+                score(); 
             }
         }
 
-        if (d_Pressed || a_Pressed || w_Pressed || s_Pressed) 
-        { 
-            if (this.id === 2) {
 
-                if(d_Pressed  && this.x < canvas.width - this.width) {
-                    this.x += 12;
-                }
-                else if(a_Pressed  && this.x > 0) {
-                    this.x -= 12;
-                }
-                else if(w_Pressed  && this.y > 0) {
-                    this.y -= 12;
-                }
-                else if(s_Pressed  && this.y < canvas.height - this.height) {
-                    this.y += 12;
-                }
-
-            }
-        }
-
-        score(); 
       }
 };
 
-var Player1 = Player.create(30,50,40,40,"#1057e5",1);
-var Player2 = Player.create(50,50,40,40,"#e51b39",2);
+var Player1 = Player.create(canvas.width/2,canvas.height-50,40,40,"#1057e5",1);
 var ball1 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,-difficulty,difficulty,30,randomColor());
 var ball2 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
 var ball3 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,3,3,30,randomColor());
@@ -199,12 +169,18 @@ function draw()
     DifficultySettings();
     spawnBalls();
     toHighscoreList(); 
+    drawControlers();
+    drawDeathscreen();
+    time();
+
+}
+
+function drawControlers()
+{
     Player1.PlayerAndCircleCollision(ball1);
     Player1.drawplayer();
     Player1.playerControler();
-    Player2.PlayerAndCircleCollision(ball1);
-    Player2.drawplayer();
-    Player2.playerControler();
+
 }
 
 function spawnBalls()
@@ -244,6 +220,21 @@ function randomColor() {
   return color;
 }
 
+function drawDeathscreen() 
+{
+    if(timer1 < 4)
+    {
+        if(timer1 % 2 === 0)
+        {
+        death(lastDeath,"red");
+        }
+        else if(timer1 % 2 === 1)
+        {
+        death(lastDeath,"white");
+        }
+    }
+}
+
 function keyDownHandler(e) 
 {
     if(e.keyCode == 39) {
@@ -259,18 +250,6 @@ function keyDownHandler(e)
         downPressed = true;
     }
 
-    if(e.keyCode == 68) {
-        d_Pressed = true;
-    }
-    else if(e.keyCode == 65) {
-        a_Pressed = true;
-    }
-    else if(e.keyCode == 87) {
-        w_Pressed = true;
-    }
-    else if(e.keyCode == 83) {
-        s_Pressed = true;
-    }
 }
 
 function keyUpHandler(e) 
@@ -288,18 +267,7 @@ function keyUpHandler(e)
         downPressed = false;
     }
 
-    if(e.keyCode == 68) {
-        d_Pressed = false;
-    }
-    else if(e.keyCode == 65) {
-        a_Pressed = false;
-    }
-    else if(e.keyCode == 87) {
-        w_Pressed = false;
-    }
-    else if(e.keyCode == 83) {
-        s_Pressed = false;
-    }
+
 }
 
 function DifficultySettings()
@@ -349,6 +317,8 @@ function restartGame()
     downPressed = false;
     ball1.ballRadius = 30;
     ball2.ballRadius = 30;
+    timer1 = 0;
+
 }
 
 function toHighscoreList() {
@@ -371,9 +341,29 @@ function toHighscoreList() {
     }
     ctx.font = "30px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText("Points: " + num ,canvas.width - 1070,40);
-    ctx.fillText("HighScore: " + highscoreList[0].score,canvas.width - spacing,40);
+    ctx.fillText("Points: " + num ,canvas.width - 1070,30);
+    ctx.fillText("HighScore: " + highscoreList[0].score,canvas.width - spacing,30);
 }
+
+function time() {
+
+
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("Time Survived : " + timer1 ,canvas.width-670,30);
+
+}
+var timer1 = 0;
+setInterval(function () {
+  ++timer1;
+}, 1000);
+
+function death(name,color) {
+    ctx.font = "30px Arial";
+    ctx.fillStyle = color;
+    ctx.fillText(name ,canvas.width-650,canvas.height/2);
+}
+
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);

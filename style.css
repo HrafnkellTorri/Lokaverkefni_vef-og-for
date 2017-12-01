@@ -1,18 +1,51 @@
 * 
 {
-	background-color: black; 
-	padding: 0;
+	background-color: blue; 
+	padding-top: 2px;
 	margin: 0;
 }
 canvas 
 {
-	border: 3px solid white;
+	border: 7px double gray;
  	display: block;
  	margin: 0 auto; 
- 	background-repeat: no-repeat;
- 	background-size: 100% 110%;
+ 	background-color: black;
 }
 #audio
 {
 	visibility: hidden;
+}
+#HOME
+{
+	margin-left: 414px;
+	margin-top: 10px;
+	background-color: black;
+}
+#NEXT
+{
+	margin-left: 487px;
+	margin-top: 10px;
+	background-color: black;
+}
+a
+{
+	color: white;
+	top: 15px;
+}
+a:hover
+{
+	color:red;
+}
+button
+{
+	border:double 5px gray;
+	max-width: 300px;
+	font-size: 20px;
+	color: white;
+	padding-left: 10px;
+	background-color: black;
+}
+p
+{
+	background-color: black;
 }

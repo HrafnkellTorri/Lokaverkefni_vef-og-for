@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Leikur</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<a href="index.html" style="text-decoration: none" id="HOME"><button id="button1"> <p>Main Menu</p></a></button></a>
+<a href="Singleplayer.html" style="text-decoration: none" id="NEXT"><button id="button2"><p>Single Player</p></a></button>
+<br><br><br>
+<canvas id="myCanvas" width="1080" height="780"></canvas>
+
+<audio id="audio" controls="audio" onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 300)" loop>
+  <source src="Mainmenu.wav" type="audio/wav">
+</audio>
+
+<script type="text/javascript" src="engine2.js"></script>
+
+</body>
+</html>
