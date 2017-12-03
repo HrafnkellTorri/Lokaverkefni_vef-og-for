@@ -1,2 +1,1 @@
-# Lokaverkefni_vef-og-for
-lokaverkefni í vef og forritun
+Play The game at HrafnkellTorri.github.io.
