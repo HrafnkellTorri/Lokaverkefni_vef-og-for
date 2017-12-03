@@ -155,7 +155,7 @@ var Player = {
       }
 };
 
-var Player1 = Player.create(canvas.width/2,canvas.height-50,40,40,"#1057e5",1);
+var Player1 = Player.create(canvas.width/2,canvas.height-50,40,40,"Yellow",1);
 var ball1 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,-difficulty,difficulty,30,randomColor());
 var ball2 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
 var ball3 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,3,3,30,randomColor());
@@ -361,7 +361,7 @@ setInterval(function () {
 function death(name,color) {
     ctx.font = "30px Arial";
     ctx.fillStyle = color;
-    ctx.fillText(name ,canvas.width-650,canvas.height/2);
+    ctx.fillText(name ,canvas.width-630,canvas.height/2);
 }
 
 

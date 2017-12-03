@@ -1,6 +1,7 @@
 * 
 {
 	background-color: blue; 
+	padding-top: 2px;
 	margin: 0;
 }
 canvas 
@@ -16,15 +17,17 @@ canvas
 }
 #HOME
 {
-	margin-left: 514px;
+	margin-left: 415px;
 	margin-top: 10px;
+	max-width: 30px;
 	background-color: black;
 }
 #NEXT
 {
-	margin-left: 287px;
+	margin-left: 235px;
 	margin-top: 10px;
 	background-color: black;
+	width: 300px;
 }
 a
 {
@@ -35,14 +38,34 @@ a:hover
 {
 	color:red;
 }
+b
+{
+	top: 30px;
+	font-size: 50px;
+	margin-top: 40px;
+	padding-left: 210px; 
+	padding-top: 110px;
+	color: white;
+    color: white;
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+}
+#logo
+{
+	padding-top: 1130px;
+}
 button
 {
 	border:double 5px gray;
-	max-width: 300px;
+	max-width: 200px;
 	font-size: 20px;
 	color: white;
 	padding-left: 10px;
-	padding-top: 8px;
 	background-color: black;
 }
 p

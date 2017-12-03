@@ -1,3 +1,9 @@
+body
+{
+  margin-top: 50px;
+  font-size: 20px;
+  background-color: black;
+}
 button
 {
   margin: 50px auto;
@@ -7,12 +13,24 @@ button
   display: block;
   max-width: 700px;
   border: 1px solid black;
-  animation: fadein 6s;
-  opacity: 1;
-
+}
+h1{
+  font-size: 100px;
+  color: red;
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;  
+}
+button 
+{ 
+font-size: 20px;
+color: black;
+border:double 5px black;
 }
 
-button { color: black; }
 button:visited { color: black; text-decoration: underline= non}
 button:focused { color: black; }
 
@@ -25,40 +43,24 @@ button:hover {
 
 div
 {
+  font-size: 20px;
+  margin-top: 100px;
   text-align: center;
-  background-color: lightblue;
+  background-color: green;
   max-width: 720px;
   padding: 1px;
   opacity: 0.95;
-  border: 1px solid black;
+  border: 5px solid yellow;
   margin: auto;
 }
-
-@keyframes fadein 
+#Writes
 {
-    0% {
-        opacity:0;
-    }
-    10% {
-       opacity:0.40;
-    }
-    to {
-        opacity:1;
-    }
-}
-
-video 
-{ 
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-  transform: translateX(-50%) translateY(-50%);
-  background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
-  background-size: cover;
-  transition: 1s opacity;
+ font-size: 30px;
+  color: red;
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;  
 }

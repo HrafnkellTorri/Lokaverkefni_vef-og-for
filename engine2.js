@@ -443,7 +443,7 @@ setInterval(function () {
 function death(name,color) {
     ctx.font = "30px Arial";
     ctx.fillStyle = color;
-    ctx.fillText(lastDeath,canvas.width-650,canvas.height/2);
+    ctx.fillText(lastDeath,canvas.width-630,canvas.height/2);
 }
 
 document.addEventListener("keydown", keyDownHandler, false);
