@@ -211,15 +211,16 @@ function draw()
     time1(); 
     drawControlers();
     drawDeathscreen();
+    console.log(timer1);
     }
     else if(P1lifes === 0)
     {
-        ctx.fillText("Player 2 Wins!",canvas.width-655,canvas.height/2-100);
+        ctx.fillText("Player 2 Wins!",canvas.width-634,canvas.height/2-100);
         running = false;
     }
     else if(P2lifes === 0)
     {
-        ctx.fillText("Player 1 Wins!",canvas.width-655,canvas.height/2-100);
+        ctx.fillText("Player 1 Wins!",canvas.width-634,canvas.height/2-100);
         running = false;
     }
     else
