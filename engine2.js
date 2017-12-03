@@ -25,8 +25,8 @@ var trueplayer1Score = 0;
 var rawplayer2Score = 0;
 var trueplayer2Score = 0;
 
-var P1lifes = 5;
-var P2lifes = 5;
+var P1lifes = 3;
+var P2lifes = 3;
 
 var lastDeath = "";
 
@@ -198,6 +198,7 @@ var ball3 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,3,3,30
 var ball4 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,3,-3,30,randomColor());
 var ball5 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
 var ball6 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
+var ball7 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
 
 function draw() 
 {
@@ -251,25 +252,30 @@ function spawnBalls()
     ball2.checkboundaries();
     ball1.drawBall();
     ball2.drawBall();
-    if(trueplayer1Score > 4)
+    if(timer1 > 4)
     {
         ball3.drawBall();
         ball3.checkboundaries();
     }
-    if(trueplayer2Score > 9)
+    if(timer1 > 9)
     {
         ball4.drawBall();
         ball4.checkboundaries();
     }
-    if(trueplayer1Score > 14)
+    if(timer1 > 14)
     {
         ball5.drawBall();
         ball5.checkboundaries();
     }
-    if(trueplayer2Score > 19)
+    if(timer1 > 19)
     {
         ball6.drawBall();
         ball6.checkboundaries();
+    }
+    if(timer1 > 24)
+    {
+        ball7.drawBall();
+        ball7.checkboundaries();
     }
 }
 
@@ -412,6 +418,13 @@ function restartGame()
     s_Pressed = false;
     ball1.ballRadius = 30;
     ball2.ballRadius = 30;
+    if(P1lifes > 0 && P2lifes > 0)
+    {
+    Player1.x = canvas.width/2+350;
+    Player1.y = 720;
+    Player2.x = canvas.width/2-350;
+    Player2.y = 720;
+    }
 }
 
 function time1() {

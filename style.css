@@ -1,7 +1,6 @@
 * 
 {
 	background-color: blue; 
-	padding-top: 2px;
 	margin: 0;
 }
 canvas 
@@ -17,13 +16,13 @@ canvas
 }
 #HOME
 {
-	margin-left: 414px;
+	margin-left: 514px;
 	margin-top: 10px;
 	background-color: black;
 }
 #NEXT
 {
-	margin-left: 487px;
+	margin-left: 287px;
 	margin-top: 10px;
 	background-color: black;
 }
@@ -43,6 +42,7 @@ button
 	font-size: 20px;
 	color: white;
 	padding-left: 10px;
+	padding-top: 8px;
 	background-color: black;
 }
 p
