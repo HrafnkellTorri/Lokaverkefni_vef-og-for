@@ -57,7 +57,8 @@ b
 }
 #logo
 {
-	padding-top: 1130px;
+ position: absolute;
+ text-align: center;
 }
 button
 {
