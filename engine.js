@@ -23,7 +23,7 @@ var highscoreList = [];
 
 var Ball = {
 
-    create : function (ball_x, ball_y,ball_dx,ball_dy,ball_rad,ball_color)
+    create : function (ball_x, ball_y,ball_dx,ball_dy,ball_rad,ball_color) //Búið til bolta og gefið honum gildi
     {
         var newFoe = Object.create(this);
         newFoe.x = ball_x;
@@ -36,7 +36,7 @@ var Ball = {
     },
 
 
-    drawBall : function()
+    drawBall : function() //Teiknað bolta og notað upplýsingar frá teikningunni
     {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.ballRadius, 0, Math.PI*2);
@@ -50,7 +50,7 @@ var Ball = {
 
     },
 
-    checkboundaries : function() 
+    checkboundaries : function() //checkað hvort bolti lendir á border eða hvort player deyr
     {
         if (Player1.PlayerAndCircleCollision(this)) 
         {
@@ -76,7 +76,7 @@ var Ball = {
 
 var Player = {
 
-    create : function (Player_x, Player_y,Player_width,Player_Height,Player_Color,Player_ID)
+    create : function (Player_x, Player_y,Player_width,Player_Height,Player_Color,Player_ID) //Creatað player
     {
         var newPlayer = Object.create(this);
         newPlayer.x = Player_x;
@@ -88,7 +88,7 @@ var Player = {
         return newPlayer;
     },
 
-    drawplayer : function() 
+    drawplayer : function() //Teiknað player
     {
         ctx.beginPath();
         ctx.rect(this.x, this.y, this.width, this.height);
@@ -101,7 +101,7 @@ var Player = {
         ctx.closePath();
     },
 
-    PlayerAndCircleCollision : function(ball) 
+    PlayerAndCircleCollision : function(ball) //reiknað hvort bolti snertir player
     {
         var distX = Math.abs(ball.x - this.x - this.width / 2.2);
         var distY = Math.abs(ball.y - this.y - this.height / 2.2);
@@ -126,7 +126,7 @@ var Player = {
         return (rx * rx + ry * ry <= (ball.ballRadius * ball.ballRadius));
     },
 
-    playerControler : function()
+    playerControler : function() //Stýring fyrir playerinn
     {
 
 
@@ -155,6 +155,8 @@ var Player = {
       }
 };
 
+//Createað alla objecta
+
 var Player1 = Player.create(canvas.width/2,canvas.height-50,40,40,"Yellow",1);
 var ball1 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,-difficulty,difficulty,30,randomColor());
 var ball2 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
@@ -163,7 +165,7 @@ var ball4 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,3,-3,3
 var ball5 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
 var ball6 = Ball.create(Math.random() * 500 + 30,Math.random() * 500 + 30,difficulty,difficulty,30,randomColor());
 
-function draw() 
+function draw() //Aðal draw fallið
 {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     DifficultySettings();
@@ -175,7 +177,7 @@ function draw()
 
 }
 
-function drawControlers()
+function drawControlers() //Fucntion safn
 {
     Player1.PlayerAndCircleCollision(ball1);
     Player1.drawplayer();
@@ -183,7 +185,7 @@ function drawControlers()
 
 }
 
-function spawnBalls()
+function spawnBalls() //Birtir fleirri bolta með tíma
 {
     ball1.checkboundaries();
     ball2.checkboundaries();
@@ -211,7 +213,7 @@ function spawnBalls()
     }
 }
 
-function randomColor() {
+function randomColor() { //Random color fall
   var letters = '0123456789ACDEF';
   var color = '#';
   for (var i = 0; i < 6; i++) {
@@ -220,7 +222,7 @@ function randomColor() {
   return color;
 }
 
-function drawDeathscreen() 
+function drawDeathscreen() // Blikk á texta
 {
     if(timer1 < 4)
     {
@@ -235,7 +237,7 @@ function drawDeathscreen()
     }
 }
 
-function keyDownHandler(e) 
+function keyDownHandler(e) //Event handler fyrir örvar
 {
     if(e.keyCode == 39) {
         rightPressed = true;
@@ -252,7 +254,7 @@ function keyDownHandler(e)
 
 }
 
-function keyUpHandler(e) 
+function keyUpHandler(e)  //Event handler fyrir örvar
 {
     if(e.keyCode == 39) {
         rightPressed = false;
@@ -270,7 +272,7 @@ function keyUpHandler(e)
 
 }
 
-function DifficultySettings()
+function DifficultySettings() //Erfiði stilling
 {
 
     var num = Math.round(rawplayer1Score / 100);
@@ -297,13 +299,13 @@ function DifficultySettings()
     }
 }
 
-function score()
+function score() // Bætt við stigum
 {
     rawplayer1Score++;
 }
 
-function restartGame()
-{
+function restartGame() // Allar breytur núllstiltar
+{ 
     difficulty = 6;
     rawplayer1Score = 0;
     trueplayer1Score = 0;
@@ -321,7 +323,7 @@ function restartGame()
 
 }
 
-function toHighscoreList() {
+function toHighscoreList() { //Local json save
     var num = Math.round(rawplayer1Score / 100);
     var spacing = 180;
     playerScore = num; 
@@ -345,20 +347,20 @@ function toHighscoreList() {
     ctx.fillText("HighScore: " + highscoreList[0].score,canvas.width - spacing,30);
 }
 
-function time() {
+function time() { //texti fyrir tíma 
 
 
     ctx.font = "30px Arial";
     ctx.fillStyle = "white";
     ctx.fillText("Time Survived : " + timer1 ,canvas.width-670,30);
 
-}
-var timer1 = 0;
+} 
+var timer1 = 0; //Timer
 setInterval(function () {
   ++timer1;
 }, 1000);
 
-function death(name,color) {
+function death(name,color) { //Dauða texti
     ctx.font = "30px Arial";
     ctx.fillStyle = color;
     ctx.fillText(name ,canvas.width-630,canvas.height/2);
